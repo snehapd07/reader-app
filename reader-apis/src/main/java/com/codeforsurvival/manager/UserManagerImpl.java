@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 import com.codeforsurvival.db.entity.User;
 import com.codeforsurvival.service.UserService;
 
@@ -20,6 +21,18 @@ public class UserManagerImpl implements UserManager {
 
 	public User addUser(User user) {
 		return this.userService.addUser(user);
+	}
+
+	public User getUser(Long id) {
+		return this.userService.getUserById(id);
+	}
+
+	public User deleteUserById(Long id) {
+		return this.userService.deleteUserById(id);
+	}
+
+	public User deleteUser(User user) {
+		return this.userService.deleteUser(user);
 	}
 
 }

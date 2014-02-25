@@ -237,10 +237,16 @@
 			<artifactId>commons-pool</artifactId>
 			<version>20030825.183949</version>
 		</dependency>
+		
 		<!-- dependecy projects -->
 		<dependency>
 			<groupId>com.codeforsurvival</groupId>
 			<artifactId>reader-commons</artifactId>
+			<version>${project.common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.codeforsurvival</groupId>
+			<artifactId>reader-util</artifactId>
 			<version>${project.common.version}</version>
 		</dependency>
 

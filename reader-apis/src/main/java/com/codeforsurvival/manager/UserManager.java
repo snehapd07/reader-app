@@ -10,4 +10,10 @@ public interface UserManager {
 
 	public User addUser(User user);
 
+	public User getUser(Long id);
+
+	public User deleteUserById(Long id);
+
+	public User deleteUser(User user);
+
 }

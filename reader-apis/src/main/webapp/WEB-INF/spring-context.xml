@@ -6,6 +6,6 @@
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 	<bean id="userManager" class="com.codeforsurvival.manager.UserManagerImpl"></bean>
-
+	<bean id="bookManager" class="com.codeforsurvival.manager.BookManagerImpl"></bean>
 
 </beans>

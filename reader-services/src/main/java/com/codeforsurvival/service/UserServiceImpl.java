@@ -17,21 +17,24 @@ public class UserServiceImpl implements UserService {
 		return this.userDao.addUser(user);
 	}
 
-	public String getUser(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public User getUserById(long id) {
+		return this.userDao.getUserById(id);
+	}
+
+	public User getUserByUsername(String username) {
+		return this.userDao.getUserByUsername(username);
 	}
 
 	public List<User> getAllUsers() {
 		return userDao.getAllUsers();
 	}
 
-	public UserDao getUserDao() {
-		return userDao;
+	public User deleteUserById(Long id) {
+		return this.userDao.deleteUserById(id);
 	}
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
+	public User deleteUser(User user) {
+		return this.userDao.deleteUser(user);
 	}
 
 }
