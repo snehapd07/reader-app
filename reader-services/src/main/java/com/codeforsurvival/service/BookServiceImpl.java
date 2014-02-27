@@ -27,4 +27,8 @@ public class BookServiceImpl implements BookService {
 		return this.bookDao.getBooksByUserId(userId);
 	}
 
+	public List<Book> getBooksByStatus(Long userId, String status) {
+		return bookDao.getBooksByStatus(userId, status);
+	}
+
 }

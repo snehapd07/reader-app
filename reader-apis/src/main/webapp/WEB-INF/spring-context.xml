@@ -7,5 +7,6 @@
 
 	<bean id="userManager" class="com.codeforsurvival.manager.UserManagerImpl"></bean>
 	<bean id="bookManager" class="com.codeforsurvival.manager.BookManagerImpl"></bean>
+	<bean id="activityManager" class="com.codeforsurvival.manager.ActivityManagerImpl"></bean>
 
 </beans>

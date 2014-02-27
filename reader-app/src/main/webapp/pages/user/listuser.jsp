@@ -27,16 +27,22 @@ th {
 	String id = String.valueOf(userid);
 %>
 <div id="users" ng-controller="profileCtrl" ng-init="getUsers()">
+	Search User: <input type="text" ng-model="queryUser" /><br />
 	<table>
 		<tr>
-			<th>User Id</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Username</th>
-			<th>User Type</th>
-			<th>Address</th>
+			<th><a href ng-click="predicate = 'id'; reverse=!reverse">User
+					Id</a></th>
+			<th><a href ng-click="predicate = 'firstName'; reverse=!reverse">First
+					Name</a></th>
+			<th><a href ng-click="predicate = 'lastName'; reverse=!reverse">Last
+					Name</a></th>
+			<th><a href ng-click="predicate = 'username'; reverse=!reverse">Username</a></th>
+			<th><a href ng-click="predicate = 'userType'; reverse=!reverse">User
+					Type</a></th>
+			<th><a href ng-click="predicate = 'address'; reverse=!reverse">Address</a></th>
 		</tr>
-		<tr ng-repeat="user in users">
+		<tr
+			ng-repeat="user in users | filter:queryUser | orderBy:predicate:reverse">
 			<td>{{user.id}}</td>
 			<td>{{user.firstName}}</td>
 			<td>{{user.lastName}}</td>

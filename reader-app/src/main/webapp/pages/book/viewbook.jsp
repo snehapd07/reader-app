@@ -29,14 +29,36 @@ h1,h2,h3 {
 	Long userid = (Long) session.getAttribute("id");
 	String id = String.valueOf(userid);
 %>
-<div id="book" ng-controller="bookCtrl"
+<div id="book" ng-controller="bookCtrl as b"
 	ng-init="getBook();getBookLink();">
 	<br />
-	<h1>Book Details:</h1>
-	Book Name : {{book.bookName}} <br /> Book Author: {{book.bookAuthor}}
+	<h3>
+		Book Name : {{book.bookName}} <br /> Book Author: {{book.bookAuthor}}
+	</h3>
+
+
+
+	<div id="activity" ng-controller="activitiCtrl as a"
+		ng-init="getStatusOptions();">
+
+		<a href ng-click="getActiviti(<%=id%>,book.id);edit=!edit;">Change
+			Book Status</a>
+
+		<form name="statusForm" style="display: inline;" ng-hide="edit"
+			ng-init="edit=true">
+			<select ng-model="activiti.status"
+				style="padding: 0; border: 1px solid rgb(233, 218, 218); border-radius: 5px; background: rgb(204, 204, 204);"
+				ng-change="addActiviti(<%=id%>,book.id);"
+				ng-options="s for s in statusoptions">
+				<option value="">-- choose color --</option>
+			</select> <input type="hidden" ng-model="activiti.userId" required /> <input
+				type="hidden" ng-model="activiti.bookId" required /> <br />
+		</form>
+
+
+	</div>
 	<br />
-	<br />
-	<iframe ng-src="{{trustSrc(bookLink)}}" width="990px" height="790px"
+	<iframe ng-src="{{trustSrc(bookLink)}}" width="990px" height="900px"
 		style=""></iframe>
 	<br />
 </div>

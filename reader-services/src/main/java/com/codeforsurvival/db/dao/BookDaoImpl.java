@@ -7,9 +7,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.codeforsurvival.db.entity.Activity;
 import com.codeforsurvival.db.entity.Book;
 import com.codeforsurvival.db.entity.User;
 
@@ -89,6 +91,35 @@ class BookDaoImpl implements BookDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+		}
+		return null;
+	}
+
+	public List<Book> getBooksByStatus(Long userId, String status) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		if (null != status && !status.isEmpty() && !status.equals("null")) {
+			try {
+				tx = session.beginTransaction();
+				Criteria cr = session.createCriteria(Activity.class);
+				cr.add(Restrictions.eq("userId", userId));
+				cr.add(Restrictions.eq("status", status));
+				cr.setProjection(Projections.property("bookId"));
+				@SuppressWarnings("unchecked")
+				List<String> list = (List<String>) cr.list();
+				cr = session.createCriteria(Book.class);
+				if (list != null && !list.isEmpty()) {
+					cr.add(Restrictions.in("id", list));
+					return cr.list();
+				}
+				tx.commit();
+			} catch (HibernateException e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}
+		} else {
+			return this.getAllBooks();
 		}
 		return null;
 	}

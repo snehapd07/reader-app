@@ -1,6 +1,5 @@
 package com.codeforsurvival.api;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,10 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.codec.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +35,9 @@ import com.codeforsurvival.util.FileUtils;
 public class BookController {
 	@Autowired
 	BookManager bookManager;
+	@Autowired
+	UserController userController;
+
 	private static final String uploadPath = "/home/preetam/upload";
 
 	@RequestMapping(value = { "/", "", "/all " }, method = RequestMethod.GET)
@@ -52,7 +52,8 @@ public class BookController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody
 	Book getBookById(@PathVariable Long id) {
-		return bookManager.getBook(id);
+		Book book = bookManager.getBook(id);
+		return book;
 	}
 
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
@@ -65,6 +66,13 @@ public class BookController {
 	public @ResponseBody
 	Book addBook(HttpServletRequest request, @RequestBody Book book) {
 		return bookManager.addBook(book);
+	}
+
+	@RequestMapping(value = "/{userId}/{status}", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Book> getBooksByStatus(@PathVariable Long userId,
+			@PathVariable String status) {
+		return bookManager.getBooksByStatus(userId, status);
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)

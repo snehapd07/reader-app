@@ -30,73 +30,81 @@ h1,h2,h3 {
 	String id = String.valueOf(userid);
 %>
 <div id="book" ng-controller="bookCtrl" ng-init="getBook()">
+	<div ng-if="book.addedBy ==<%=id%>">
+		<button id="editbtn" ng-href="#"
+			ng-click="edit=!edit;changeValue();getBook();">{{editbtn}}</button>
 
-	<button id="editbtn" ng-href="#"
-		ng-click="edit=!edit;changeValue();getBook();">{{editbtn}}</button>
+		<form name="bookForm" id="bookForm" class="css-form" ng-hide="edit"
+			ng-init="edit=true">
+			<h3>Edit Book Details</h3>
+			<table width="400px">
+				<tr>
+					<td>Book Name</td>
+					<td><input type="text" ng-model="book.bookName" required /></td>
+				</tr>
+				<tr>
+					<td>Author Name</td>
+					<td><input type="text" ng-model="book.bookAuthor" required /></td>
+				</tr>
+				<tr>
+					<td>Rating</td>
+					<td><input type="text" ng-model="book.rating"
+						ng-disabled="true" required /></td>
+				</tr>
+				<tr>
+					<td>Added By</td>
+					<td><input type="text" ng-model="book.addedBy"
+						ng-disabled="true" required /></td>
+				</tr>
+				<tr>
+					<td>File Name</td>
+					<td><input type="text" ng-model="book.bookLink"
+						ng-disabled="true" required /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input class="primarybtn"
+						ng-click="edit=!edit;changeValue();saveBook();getBook();"
+						type="submit" value="Submit"
+						ng-disabled="bookForm.$invalid || isUnchanged(book)" /></td>
+				</tr>
+			</table>
+			<br />
+			<hr>
+			<br />
+		</form>
 
-	<form name="bookForm" id="bookForm" class="css-form" ng-hide="edit" ng-init="edit=true">
-		<h3>Edit Book Details</h3>
+		<h3>book Details</h3>
 		<table width="400px">
 			<tr>
+				<td></td>
+				<td><a href="#/book/view/{{book.id}}">Read Book</a></td>
+			</tr>
+			<tr>
 				<td>Book Name</td>
-				<td><input type="text" ng-model="book.bookName" required /></td>
+				<td><span>{{book.bookName}} </span></td>
 			</tr>
 			<tr>
 				<td>Author Name</td>
-				<td><input type="text" ng-model="book.bookAuthor" required /></td>
+				<td><span>{{book.bookAuthor}} </span></td>
 			</tr>
 			<tr>
 				<td>Rating</td>
-				<td><input type="text" ng-model="book.rating"
-					ng-disabled="true" required /></td>
+				<td><span>{{book.rating}} </span></td>
 			</tr>
 			<tr>
 				<td>Added By</td>
-				<td><input type="text" ng-model="book.addedBy"
-					ng-disabled="true" required /></td>
+				<td><span>{{book.addedBy}} </span></td>
 			</tr>
 			<tr>
 				<td>File Name</td>
-				<td><input type="text" ng-model="book.bookLink"
-					ng-disabled="true" required /></td>
+				<td><span>{{book.bookLink}} </span></td>
 			</tr>
-			<tr>
-				<td></td>
-				<td><input class="primarybtn"
-					ng-click="edit=!edit;changeValue();saveBook();getBook();"
-					type="submit" value="Submit"
-					ng-disabled="bookForm.$invalid || isUnchanged(book)" /></td>
-			</tr>
+
 		</table>
-		<br />
-		<hr>
-		<br />
-	</form>
-
-	<h3>book Details</h3>
-	<table width="400px">
-		<tr>
-			<td>Book Name</td>
-			<td><span>{{book.bookName}} </span></td>
-		</tr>
-		<tr>
-			<td>Author Name</td>
-			<td><span>{{book.bookAuthor}} </span></td>
-		</tr>
-		<tr>
-			<td>Rating</td>
-			<td><span>{{book.rating}} </span></td>
-		</tr>
-		<tr>
-			<td>Added By</td>
-			<td><span>{{book.addedBy}} </span></td>
-		</tr>
-		<tr>
-			<td>File Name</td>
-			<td><span>{{book.bookLink}} </span></td>
-		</tr>
-	</table>
-
-
+	</div>
+	<div ng-if="book.addedBy !=<%=id%>">
+		<h1>You are not owner of this Book. Access Denied.</h1>
+	</div>
 </div>
-
+</div>

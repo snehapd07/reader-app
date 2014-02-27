@@ -1,15 +1,45 @@
 var readerAppControllers = angular.module('readerAppControllers', [
 		'ngSanitize', 'readerDirectives', 'readerService' ]);
 
-readerAppControllers.controller('userListCtrl', [
-		'$scope',
-		'$http',
-		function($scope, $http) {
-			$http.get('http://localhost:9080/reader-apis/api/user/all')
-					.success(function(data) {
-						$scope.users = data.users;
-					});
-		} ]);
+readerAppControllers
+		.controller(
+				'activitiCtrl',
+				[
+						'$scope',
+						'$http',
+						'$timeout',
+						function($scope, $http, $timeout) {
+
+							$scope.addActiviti = function(userId, bookId) {
+								$scope.activiti.userId = userId;
+								$scope.activiti.bookId = bookId;
+								$http
+										.post(
+												'http://localhost:9080/reader-apis/api/activiti/add',
+												$scope.activiti).success(
+												function(data) {
+													$scope.activiti = data;
+												});
+							};
+
+							$scope.getStatusOptions = function() {
+								$http
+										.get(
+												'http://localhost:9080/reader-apis/api/activiti/statusoptions')
+										.success(function(data) {
+											$scope.statusoptions = data;
+										});
+							};
+							$scope.getActiviti = function(userId, bookId) {
+								$http.get(
+										'http://localhost:9080/reader-apis/api/activiti/'
+												+ userId + '/' + bookId)
+										.success(function(data) {
+											$scope.activiti = data;
+										});
+							};
+
+						} ]);
 
 readerAppControllers.controller('profileCtrl', [
 		'$scope',
@@ -40,8 +70,8 @@ readerAppControllers.controller('profileCtrl', [
 				$window.location.href = './j_spring_security_logout';
 			};
 
-			$scope.getuser = function(id) {
-				$http.get('http://localhost:9080/reader-apis/api/user/' + id)
+			$scope.getuser = function() {
+				$http.get('http://localhost:9080/reader-apis/api/user/me')
 						.success(function(data) {
 							$scope.user = data;
 						});
@@ -94,7 +124,9 @@ readerAppControllers
 												+ $scope.bookId).success(
 										function(data) {
 											$scope.book = data;
-										});
+										}).error(function(data) {
+									alert("error" + data);
+								});
 							};
 							$scope.trustSrc = function(src) {
 								return $sce.trustAsResourceUrl(src);
@@ -151,6 +183,14 @@ readerAppControllers
 								$scope.userId = id;
 							};
 
+							$scope.getBooksByStatus = function(userId, status) {
+								$http.get(
+										'http://localhost:9080/reader-apis/api/book/'
+												+ userId + '/' + status)
+										.success(function(data) {
+											$scope.books = data;
+										});
+							};
 							// $scope.profile(1);
 
 						} ]);

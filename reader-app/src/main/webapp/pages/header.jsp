@@ -80,6 +80,10 @@ body {
 .css-form textarea.ng-valid.ng-dirty {
 	border: 1px solid #78FA89;
 }
+
+#middle a {
+	color: black;
+}
 </style>
 </head>
 
@@ -88,9 +92,8 @@ body {
 	<div id="menu">
 		<a href="#/home">Home Page</a> | <a href="#/profile">Profile</a> | <a
 			href="#/users">View All Users</a> | <a href="#/books">View All
-			Books</a> | <a href="#/mybooks">My Read Books</a> | <a
-			href="#/book/upload">Upload New Book</a>|<a href="#/logout">
-			Logout</a>
+			Books</a> | <a href="#/mybooks">My Books</a> | <a href="#/book/upload">Upload
+			New Book</a>|<a href="#/logout"> Logout</a>
 
 	</div>
 	<div id="middle">

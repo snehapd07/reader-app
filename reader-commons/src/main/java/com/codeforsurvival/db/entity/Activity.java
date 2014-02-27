@@ -19,14 +19,14 @@ public class Activity implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 3245087820771732818L;
 	private Long id;
-	private int userId;
-	private int bookId;
+	private Long userId;
+	private Long bookId;
 	private String status;
 
 	public Activity() {
 	}
 
-	public Activity(int userId, int bookId, String status) {
+	public Activity(Long userId, Long bookId, String status) {
 		this.userId = userId;
 		this.bookId = bookId;
 		this.status = status;
@@ -44,20 +44,20 @@ public class Activity implements java.io.Serializable {
 	}
 
 	@Column(name = "user_id", nullable = false)
-	public int getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
 	@Column(name = "book_id", nullable = false)
-	public int getBookId() {
+	public Long getBookId() {
 		return this.bookId;
 	}
 
-	public void setBookId(int bookId) {
+	public void setBookId(Long bookId) {
 		this.bookId = bookId;
 	}
 

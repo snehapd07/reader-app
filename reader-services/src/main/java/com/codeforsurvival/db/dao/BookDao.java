@@ -14,4 +14,6 @@ public interface BookDao {
 
 	public List<Book> getBooksByUserId(Long userId);
 
+	public List<Book> getBooksByStatus(Long userId, String status);
+
 }

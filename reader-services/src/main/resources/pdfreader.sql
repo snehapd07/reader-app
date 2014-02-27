@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2014 at 01:28 PM
+-- Generation Time: Feb 27, 2014 at 09:02 PM
 -- Server version: 5.5.31-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.2
 
@@ -28,11 +28,25 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `activity` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `book_id` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `book_id` bigint(20) NOT NULL,
   `status` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`book_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `activity`
+--
+
+INSERT INTO `activity` (`id`, `user_id`, `book_id`, `status`) VALUES
+(1, 5, 4, 'READING'),
+(4, 5, 5, 'READING'),
+(5, 5, 2, 'NOT_STARTED'),
+(6, 5, 1, 'COMPLETED'),
+(7, 1, 1, 'READING'),
+(8, 1, 3, 'READING'),
+(9, 1, 2, 'NOT_STARTED');
 
 -- --------------------------------------------------------
 
@@ -50,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `book` (
   `book_link` text,
   `added_by` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `book`
@@ -61,7 +75,8 @@ INSERT INTO `book` (`id`, `book_name`, `book_author`, `rating`, `total_points_ga
 (2, 'Springs MVC 3.0', 'springs', 0, 0, 0, 'spring-framework-reference.pdf', 1),
 (3, 'Ticket', 'IRCTTC', 0, 0, 0, 'IRCTC Ltd,Booked Ticket Printing.pdf', 1),
 (4, 'Alfresco', 'Alfresco', 0, 0, 0, '0596516681.pdf', 5),
-(5, 'Effective Java', 'Java', 0, 0, 0, 'EffectiveJAVA.pdf', 12);
+(5, 'Effective Java', 'Java', 0, 0, 0, 'EffectiveJAVA.pdf', 12),
+(6, NULL, NULL, 0, 0, 0, 'AppReceipt_1967464400_20140210_053123.pdf', 5);
 
 -- --------------------------------------------------------
 
@@ -91,7 +106,7 @@ INSERT INTO `user` (`id`, `first_name`, `last_name`, `age`, `address`, `username
 (1, 'Test', 'Test', 23, 'Shivnagar Delhisss', 'test', 'test', 'admin', 1),
 (3, 'Ankur', 'Jain', 25, 'Room 26 Hostel-B', 'smishra', '123456', 'reader', 1),
 (4, 'Praveen', 'Kumar', 40, 'delhi', 'praveen', '1234', 'reader', 1),
-(5, 'Code For Survival', 'Survival of the Fittest', 2, 'CFFFF', 'cfs', 'cfs', 'admin', 1),
+(5, 'CFS', 'Survival of the Fittest', 2, 'CFFFF', 'cfs', 'cfs', 'admin', 1),
 (6, 'Test1', 'Test1', 40, 'BSD', 'test1', 'test1', 'reader', 1),
 (7, 'Test2', 'test2', 12, 'tttt', 'test2', 'test2', 'reader', 1),
 (8, 'ASD', 'ASD', 12, 'asddd', 'asd', 'asd', 'reader', 1),

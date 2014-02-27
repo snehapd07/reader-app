@@ -32,4 +32,8 @@ public class BookManagerImpl implements BookManager {
 		return bookService.getBooksByUserId(userId);
 	}
 
+	public List<Book> getBooksByStatus(Long userId, String status) {
+		return bookService.getBooksByStatus(userId, status);
+	}
+
 }

@@ -14,5 +14,6 @@
 	<bean id="userDao" class="com.codeforsurvival.db.dao.UserDaoImpl"></bean>
 	<bean id="userRolesDao" class="com.codeforsurvival.db.dao.UserRolesDaoImpl"></bean>
 	<bean id="bookDao" class="com.codeforsurvival.db.dao.BookDaoImpl"></bean>
+	<bean id="activityDao" class="com.codeforsurvival.db.dao.ActivityDaoImpl"></bean>
 
 </beans>

@@ -13,4 +13,6 @@ public interface BookManager {
 	public Book getBook(Long id);
 
 	public List<Book> getBooksByUserId(Long userId);
+	
+	public List<Book> getBooksByStatus(Long userId, String status);
 }

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,10 +44,13 @@ public class UserController {
 		return userManager.addUser(user);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/me", method = RequestMethod.GET)
 	public @ResponseBody
-	User getUserById(@PathVariable Long id) {
-		return userManager.getUser(id);
+	User getUserById() {
+		Authentication auth = SecurityContextHolder.getContext()
+				.getAuthentication();
+		String username = auth.getName();
+		return userManager.getUserByUsername(username);
 	}
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -65,4 +70,5 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/j_spring_security_logout";
 	}
+
 }

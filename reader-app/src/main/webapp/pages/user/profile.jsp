@@ -33,7 +33,7 @@ h1,h2,h3 {
 	ng-init="getuser('<%=id%>')">
 
 	<button id="editbtn" ng-href="#"
-		ng-click="edit=!edit;changeValue();getuser('<%=id%>');">{{editbtn}}</button>
+		ng-click="edit=!edit;changeValue();getuser();">{{editbtn}}</button>
 
 	<form name="profileForm" class="css-form" id="profileForm"
 		ng-hide="edit" ng-init="edit=true">
