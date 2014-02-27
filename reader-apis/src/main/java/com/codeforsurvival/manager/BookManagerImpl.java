@@ -17,18 +17,19 @@ public class BookManagerImpl implements BookManager {
 	private BookService bookService;
 
 	public Book addBook(Book book) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookService.addBook(book);
 	}
 
 	public List<Book> getAllBooks() {
-		// TODO Auto-generated method stub
-		return null;
+		return bookService.getAllBooks();
 	}
 
 	public Book getBook(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookService.getBook(id);
+	}
+
+	public List<Book> getBooksByUserId(Long userId) {
+		return bookService.getBooksByUserId(userId);
 	}
 
 }

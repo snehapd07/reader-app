@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,8 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody
 	User addUser(@RequestBody User user) {
+		if (null == user.getId())
+			throw new IllegalAccessError();
 		return userManager.addUser(user);
 	}
 
@@ -56,4 +60,9 @@ public class UserController {
 		return userManager.deleteUser(user);
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/j_spring_security_logout";
+	}
 }

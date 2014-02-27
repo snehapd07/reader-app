@@ -10,7 +10,7 @@
 	<context:annotation-config />
 	<import resource="classpath:services-context.xml" />
 
-	<bean id="userAction" class="com.codeforsurvival.action.user.UserAction" />
+	<bean id="userAction" class="com.codeforsurvival.action.user.RegisterAction" />
 	<bean id="loginAction" class="com.codeforsurvival.action.user.WelcomeAction" />
 
 </beans>

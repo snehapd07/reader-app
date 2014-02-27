@@ -35,8 +35,8 @@ h1,h2,h3 {
 	<button id="editbtn" ng-href="#"
 		ng-click="edit=!edit;changeValue();getuser('<%=id%>');">{{editbtn}}</button>
 
-	<form name="profileForm" id="profileForm" ng-hide="edit"
-		ng-init="edit=true">
+	<form name="profileForm" class="css-form" id="profileForm"
+		ng-hide="edit" ng-init="edit=true">
 		<h3>Edit User Details</h3>
 		<table width="400px">
 			<tr>
@@ -54,7 +54,7 @@ h1,h2,h3 {
 			</tr>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" ng-model="user.passowrd" required /></td>
+				<td><input type="password" ng-model="user.password" required /></td>
 			</tr>
 			<tr>
 				<td>Address</td>
@@ -69,7 +69,8 @@ h1,h2,h3 {
 				<td></td>
 				<td><input class="primarybtn"
 					ng-click="edit=!edit;changeValue();saveUser();" type="submit"
-					value="Submit" ng-disabled="profileForm.$invalid || isUnchanged(user)" /></td>
+					value="Submit"
+					ng-disabled="profileForm.$invalid || isUnchanged(user)" /></td>
 			</tr>
 		</table>
 		<br />

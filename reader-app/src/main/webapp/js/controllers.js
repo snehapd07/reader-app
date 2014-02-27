@@ -1,4 +1,5 @@
-var readerAppControllers = angular.module('readerAppControllers', []);
+var readerAppControllers = angular.module('readerAppControllers', [
+		'ngSanitize', 'readerDirectives', 'readerService' ]);
 
 readerAppControllers.controller('userListCtrl', [
 		'$scope',
@@ -13,9 +14,32 @@ readerAppControllers.controller('userListCtrl', [
 readerAppControllers.controller('profileCtrl', [
 		'$scope',
 		'$http',
-		function($scope, $http) {
+		'Base64',
+		'$window',
+		function($scope, $http, Base64, $window) {
 			$scope.editbtn = "Edit";
-			$scope.user = "";
+			$scope.username = "";
+			$scope.userMapForBooks = {};
+
+			$scope.setAuth = function(username, password) {
+				$http.defaults.headers.common.Authentication = 'Basic '
+						+ Base64.encode(username + ':' + password);
+				$http.defaults.headers.common.Authorization = 'Basic '
+						+ Base64.encode(username + ':' + password);
+			};
+
+			$scope.delAuth = function() {
+
+				delete $http.defaults.headers.common.Authentication;
+				delete $http.defaults.headers.common.Authorization;
+
+				$http.get('http://localhost:9080/reader-apis/api/user/logout')
+						.success(function(data) {
+							console.log("logged out");
+						});
+				$window.location.href = './j_spring_security_logout';
+			};
+
 			$scope.getuser = function(id) {
 				$http.get('http://localhost:9080/reader-apis/api/user/' + id)
 						.success(function(data) {
@@ -47,3 +71,86 @@ readerAppControllers.controller('profileCtrl', [
 			// $scope.profile(1);
 
 		} ]);
+
+readerAppControllers
+		.controller(
+				'bookCtrl',
+				[
+						'$scope',
+						'$http',
+						'$routeParams',
+						'$fileUpload',
+						'$location',
+						'$sce',
+						function($scope, $http, $routeParams, $fileUpload,
+								$location, $sce) {
+							$scope.editbtn = "Edit";
+							$scope.bookId = $routeParams.bookId;
+							$scope.downlodedFile = "";
+
+							$scope.getBook = function() {
+								$http.get(
+										'http://localhost:9080/reader-apis/api/book/'
+												+ $scope.bookId).success(
+										function(data) {
+											$scope.book = data;
+										});
+							};
+							$scope.trustSrc = function(src) {
+								return $sce.trustAsResourceUrl(src);
+							};
+
+							$scope.getUserBooks = function(id) {
+								$http.get(
+										'http://localhost:9080/reader-apis/api/book/user/'
+												+ id).success(function(data) {
+									$scope.books = data;
+								});
+							};
+
+							$scope.changeValue = function() {
+								if ($scope.editbtn == "Edit")
+									$scope.editbtn = "X";
+								else if ($scope.editbtn == "X")
+									$scope.editbtn = "Edit";
+							};
+
+							$scope.saveBook = function() {
+								$http
+										.post(
+												'http://localhost:9080/reader-apis/api/book/add/',
+												$scope.book).success(
+												function(data) {
+													$scope.book = data;
+												});
+							};
+
+							$scope.uploadBook = function() {
+								var file = $scope.file;
+								console.log('file is ' + JSON.stringify(file));
+								var uploadUrl = "http://localhost:9080/reader-apis/api/book/upload/";
+								$fileUpload.uploadFileToUrl(file, uploadUrl,
+										$scope.userId);
+							};
+
+							$scope.getBooks = function() {
+								$http
+										.get(
+												'http://localhost:9080/reader-apis/api/book/all')
+										.success(function(data) {
+											$scope.books = data.books;
+										});
+							};
+
+							$scope.getBookLink = function() {
+								$scope.bookLink = "http://localhost:9080/reader-apis/api/book/download/"
+										+ $scope.bookId;
+							};
+
+							$scope.initUploadForm = function(id) {
+								$scope.userId = id;
+							};
+
+							// $scope.profile(1);
+
+						} ]);

@@ -11,4 +11,6 @@ public interface BookService {
 	public List<Book> getAllBooks();
 
 	public Book getBook(Long id);
+
+	public List<Book> getBooksByUserId(Long userId);
 }

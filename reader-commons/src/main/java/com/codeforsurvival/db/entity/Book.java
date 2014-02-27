@@ -1,6 +1,10 @@
 package com.codeforsurvival.db.entity;
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,19 +19,21 @@ public class Book implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 7501710916280301657L;
-	private long id;
+	private Long id;
 	private String bookName;
 	private String bookAuthor;
 	private float rating;
 	private long totalPointsGained;
 	private long totalUserRated;
 	private String bookLink;
+	private Long addedBy;
 
 	public Book() {
 	}
 
-	public Book(long id, String bookName, String bookAuthor, float rating,
-			long totalPointsGained, long totalUserRated, String bookLink) {
+	public Book(Long id, String bookName, String bookAuthor, float rating,
+			long totalPointsGained, long totalUserRated, String bookLink,
+			Long addedBy) {
 		this.id = id;
 		this.bookName = bookName;
 		this.bookAuthor = bookAuthor;
@@ -35,19 +41,21 @@ public class Book implements java.io.Serializable {
 		this.totalPointsGained = totalPointsGained;
 		this.totalUserRated = totalUserRated;
 		this.bookLink = bookLink;
+		this.addedBy = addedBy;
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(name = "book_name", nullable = false, length = 65535)
+	@Column(name = "book_name", nullable = true, length = 65535)
 	public String getBookName() {
 		return this.bookName;
 	}
@@ -56,7 +64,7 @@ public class Book implements java.io.Serializable {
 		this.bookName = bookName;
 	}
 
-	@Column(name = "book_author", nullable = false, length = 65535)
+	@Column(name = "book_author", nullable = true, length = 65535)
 	public String getBookAuthor() {
 		return this.bookAuthor;
 	}
@@ -65,7 +73,7 @@ public class Book implements java.io.Serializable {
 		this.bookAuthor = bookAuthor;
 	}
 
-	@Column(name = "rating", nullable = false, precision = 12, scale = 0)
+	@Column(name = "rating", nullable = true, precision = 12, scale = 0)
 	public float getRating() {
 		return this.rating;
 	}
@@ -74,7 +82,7 @@ public class Book implements java.io.Serializable {
 		this.rating = rating;
 	}
 
-	@Column(name = "total_points_gained", nullable = false)
+	@Column(name = "total_points_gained", nullable = true)
 	public long getTotalPointsGained() {
 		return this.totalPointsGained;
 	}
@@ -83,7 +91,7 @@ public class Book implements java.io.Serializable {
 		this.totalPointsGained = totalPointsGained;
 	}
 
-	@Column(name = "total_user_rated", nullable = false)
+	@Column(name = "total_user_rated", nullable = true)
 	public long getTotalUserRated() {
 		return this.totalUserRated;
 	}
@@ -92,13 +100,22 @@ public class Book implements java.io.Serializable {
 		this.totalUserRated = totalUserRated;
 	}
 
-	@Column(name = "book_link", nullable = false, length = 65535)
+	@Column(name = "book_link", nullable = true, length = 65535)
 	public String getBookLink() {
 		return this.bookLink;
 	}
 
 	public void setBookLink(String bookLink) {
 		this.bookLink = bookLink;
+	}
+
+	@Column(name = "added_by", nullable = false)
+	public Long getAddedBy() {
+		return addedBy;
+	}
+
+	public void setAddedBy(Long addedBy) {
+		this.addedBy = addedBy;
 	}
 
 }

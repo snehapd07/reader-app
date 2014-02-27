@@ -11,6 +11,7 @@
 	<context:annotation-config />
 
 	<bean id="userService" class="com.codeforsurvival.service.UserServiceImpl"></bean>
+	<bean id="userRolesService" class="com.codeforsurvival.service.UserRolesServiceImpl"></bean>
 	<bean id="bookService" class="com.codeforsurvival.service.BookServiceImpl"></bean>
 
 </beans>

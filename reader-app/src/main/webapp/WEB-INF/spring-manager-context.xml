@@ -10,7 +10,8 @@
 	<context:annotation-config />
 	<import resource="classpath:services-context.xml" />
 
-	<bean id="userAction" class="com.codeforsurvival.manager.UserManagerImpl" />
+	<bean id="userManager" class="com.codeforsurvival.manager.UserManagerImpl" />
+	<bean id="userRolesManager" class="com.codeforsurvival.manager.UserRolesManagerImpl" />
 
 </beans>
 

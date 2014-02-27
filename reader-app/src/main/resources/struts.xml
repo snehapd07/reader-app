@@ -6,15 +6,19 @@
 <struts>
 
 	<package name="user" namespace="/" extends="struts-default">
-<!-- 		<action name="user" class="com.codeforsurvival.action.user.UserAction"> -->
-<!-- 			<result name="edit">pages/user/edituser.jsp</result> -->
-<!-- 			<result name="view">pages/user/showuser.jsp</result> -->
-<!-- 			<result name="profile">pages/user/auser/profile.jsp</result> -->
-<!-- 		</action> -->
+		<!-- <action name="user" class="com.codeforsurvival.action.user.UserAction"> -->
+		<!-- <result name="edit">pages/user/edituser.jsp</result> -->
+		<!-- <result name="view">pages/user/showuser.jsp</result> -->
+		<!-- <result name="profile">pages/user/auser/profile.jsp</result> -->
+		<!-- </action> -->
 		<action name="home" class="com.codeforsurvival.action.user.WelcomeAction">
 			<result name="success">pages/home.jsp</result>
-		</action>		
-		
+		</action>
+		<action name="register" class="com.codeforsurvival.action.user.RegisterAction">
+			<result name="success">pages/register.jsp</result>
+			<result type="redirect" name="login">pages/home.jsp</result>
+		</action>
+
 	</package>
 
 </struts>

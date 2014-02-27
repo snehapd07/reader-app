@@ -14,13 +14,16 @@
 <!-- 	</div> -->
 <%
 	String username = (String) request.getAttribute("username");
+	String password = (String) request.getAttribute("password");
 	Long userId = (Long) request.getAttribute("id");
 	session.setAttribute("username", username);
+	session.setAttribute("password", password);
 	session.setAttribute("id", userId);
 %>
 
 <div ng-view></div>
+
 <span ng-show="isViewLoading"> loading the view... <span>
 
 
-<%@ include file="./footer.jsp"%>
+		<%@ include file="./footer.jsp"%>

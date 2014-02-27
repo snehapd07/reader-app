@@ -1,10 +1,10 @@
 package com.codeforsurvival.db.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -26,20 +26,21 @@ public class User implements java.io.Serializable {
 	private int age;
 	private String address;
 	private String username;
-	private String passowrd;
+	private String password;
 	private String userType;
+	private boolean enabled;
 
 	public User() {
 	}
 
 	public User(String firstName, String lastName, int age, String address,
-			String username, String passowrd, String userType) {
+			String username, String password, String userType) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.address = address;
 		this.username = username;
-		this.passowrd = passowrd;
+		this.password = password;
 		this.userType = userType;
 	}
 
@@ -99,13 +100,13 @@ public class User implements java.io.Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "passowrd", nullable = false, length = 65535)
-	public String getPassowrd() {
-		return this.passowrd;
+	@Column(name = "password", nullable = false, length = 65535)
+	public String getPassword() {
+		return this.password;
 	}
 
-	public void setPassowrd(String passowrd) {
-		this.passowrd = passowrd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Column(name = "user_type", nullable = false, length = 10)
@@ -115,6 +116,15 @@ public class User implements java.io.Serializable {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	@Column(name = "enabled", nullable = false, length = 10)
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

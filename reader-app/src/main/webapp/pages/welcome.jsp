@@ -8,9 +8,14 @@
 	margin: 0 auto;
 }
 </style>
+<%
+	String username = (String) session.getAttribute("username");
+	String password = (String) session.getAttribute("password");
 
+%>
 
-<div ng-controller="profileCtrl" id="home">
+<div ng-controller="profileCtrl" id="home"
+	ng-init="setAuth('<%=username%>','<%=password%>');">
 	<h1>
 		Hey, <i> <%
  	out.println(session.getAttribute("username"));

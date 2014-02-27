@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.codeforsurvival.db.entity.Book;
 import com.codeforsurvival.db.entity.User;
 
-public class BookDaoImpl implements BookDao {
+class BookDaoImpl implements BookDao {
 	@Autowired
 	SessionFactory sessionFactory;
 
@@ -22,8 +22,8 @@ public class BookDaoImpl implements BookDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			if (book.getId() != 0) {
-				session.saveOrUpdate(book);
+			if (null != (Long) book.getId()) {
+				session.update(book);
 			} else {
 				Long id = (Long) session.save(book);
 				book.setId(id);
@@ -61,7 +61,7 @@ public class BookDaoImpl implements BookDao {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Criteria cr = session.createCriteria(User.class);
+			Criteria cr = session.createCriteria(Book.class);
 			cr.add(Restrictions.eq("id", id));
 			Book book = (Book) cr.list().get(0);
 			tx.commit();
@@ -74,4 +74,22 @@ public class BookDaoImpl implements BookDao {
 		return null;
 	}
 
+	public List<Book> getBooksByUserId(Long userId) {
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			Criteria cr = session.createCriteria(Book.class);
+			cr.add(Restrictions.eq("addedBy", userId));
+			@SuppressWarnings("unchecked")
+			List<Book> list = (List<Book>) cr.list();
+			tx.commit();
+			return list;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
 }
