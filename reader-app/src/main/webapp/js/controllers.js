@@ -19,7 +19,10 @@ readerAppControllers
 												$scope.activiti).success(
 												function(data) {
 													$scope.activiti = data;
+													$scope.getBook();
 												});
+								
+
 							};
 
 							$scope.getStatusOptions = function() {
@@ -37,6 +40,18 @@ readerAppControllers
 										.success(function(data) {
 											$scope.activiti = data;
 										});
+							};
+
+							$scope.updateRating = function(userId, bookId) {
+								$scope.activiti.userId = userId;
+								$scope.activiti.bookId = bookId;
+								$http
+										.post(
+												'http://localhost:9080/reader-apis/api/activiti/add',
+												$scope.activiti).success(
+												function(data) {
+													$scope.activiti = data;
+												});
 							};
 
 						} ]);
@@ -117,6 +132,7 @@ readerAppControllers
 							$scope.editbtn = "Edit";
 							$scope.bookId = $routeParams.bookId;
 							$scope.downlodedFile = "";
+							$scope.ratinglist = [ 1, 2, 3, 4, 5 ];
 
 							$scope.getBook = function() {
 								$http.get(
@@ -191,6 +207,7 @@ readerAppControllers
 											$scope.books = data;
 										});
 							};
+
 							// $scope.profile(1);
 
 						} ]);

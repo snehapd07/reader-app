@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <style>
 #activity {
 	width: 700px;
@@ -37,7 +38,7 @@ th {
 				ng-options="s for s in statusoptions">
 				<option value="">-- choose color --</option>
 			</select> <br /> Search Books : <input type="text" ng-model="queryBook" /> <br />
-			 Book Results:
+			Book Results:
 			<table>
 				<tr>
 					<th><a href ng-click="predicate = 'id'; reverse=!reverse">Book
@@ -59,7 +60,7 @@ th {
 					<td>{{book.id}}</td>
 					<td>{{book.bookName}}</td>
 					<td>{{book.bookAuthor}}</td>
-					<td>{{book.rating}}/5</td>
+					<td>{{book.rating | number:2}}/5</td>
 					<td>{{book.addedBy}}</td>
 					<td>{{book.bookLink}}</td>
 					<td><a href="#/book/view/{{book.id}}">Read</a></td>

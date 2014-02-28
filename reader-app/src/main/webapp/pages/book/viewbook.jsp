@@ -41,18 +41,33 @@ h1,h2,h3 {
 	<div id="activity" ng-controller="activitiCtrl as a"
 		ng-init="getStatusOptions();">
 
+		<!-- Reading Status -->
 		<a href ng-click="getActiviti(<%=id%>,book.id);edit=!edit;">Change
 			Book Status</a>
-
-		<form name="statusForm" style="display: inline;" ng-hide="edit"
+		<form name="statusForm"
+			style="display: inline; padding: 0; margin: 0;" ng-hide="edit"
 			ng-init="edit=true">
 			<select ng-model="activiti.status"
-				style="padding: 0; border: 1px solid rgb(233, 218, 218); border-radius: 5px; background: rgb(204, 204, 204);"
+				style="padding: 0; border: 1px solid rgb(233, 218, 218); border-radius: 5px; background: rgb(204, 204, 204); text-transform: lowercase;"
 				ng-change="addActiviti(<%=id%>,book.id);"
 				ng-options="s for s in statusoptions">
 				<option value="">-- choose color --</option>
 			</select> <input type="hidden" ng-model="activiti.userId" required /> <input
-				type="hidden" ng-model="activiti.bookId" required /> <br />
+				type="hidden" ng-model="activiti.bookId" required />
+		</form>
+		<br />
+
+		<!-- Rate Me -->
+		<a href ng-click="getActiviti(<%=id%>,book.id);rate=!rate;">Rate
+			Me</a>
+		<form name="rateForm" style="display: inline;" ng-hide="rate"
+			ng-init="rate=true">
+			<select ng-model="activiti.ratedByUser"
+				style="padding: 0; border: 1px solid rgb(233, 218, 218); border-radius: 5px; background: rgb(204, 204, 204);"
+				ng-change="addActiviti(<%=id%>,book.id);"
+				ng-options="r for r in ratinglist">
+				<option value="">-- rate book --</option>
+			</select> Over All Rating: {{book.rating | number:2 }}
 		</form>
 
 

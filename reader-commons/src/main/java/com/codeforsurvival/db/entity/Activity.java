@@ -22,6 +22,7 @@ public class Activity implements java.io.Serializable {
 	private Long userId;
 	private Long bookId;
 	private String status;
+	private Double ratedByUser;
 
 	public Activity() {
 	}
@@ -68,6 +69,15 @@ public class Activity implements java.io.Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	@Column(name = "rated_by_user", nullable = false)
+	public Double getRatedByUser() {
+		return ratedByUser;
+	}
+
+	public void setRatedByUser(Double ratedByUser) {
+		this.ratedByUser = ratedByUser;
 	}
 
 }

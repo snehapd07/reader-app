@@ -22,24 +22,19 @@ public class Book implements java.io.Serializable {
 	private Long id;
 	private String bookName;
 	private String bookAuthor;
-	private float rating;
-	private long totalPointsGained;
-	private long totalUserRated;
+	private Double rating;
 	private String bookLink;
 	private Long addedBy;
 
 	public Book() {
 	}
 
-	public Book(Long id, String bookName, String bookAuthor, float rating,
-			long totalPointsGained, long totalUserRated, String bookLink,
-			Long addedBy) {
+	public Book(Long id, String bookName, String bookAuthor, Double rating,
+			String bookLink, Long addedBy) {
 		this.id = id;
 		this.bookName = bookName;
 		this.bookAuthor = bookAuthor;
 		this.rating = rating;
-		this.totalPointsGained = totalPointsGained;
-		this.totalUserRated = totalUserRated;
 		this.bookLink = bookLink;
 		this.addedBy = addedBy;
 	}
@@ -74,30 +69,12 @@ public class Book implements java.io.Serializable {
 	}
 
 	@Column(name = "rating", nullable = true, precision = 12, scale = 0)
-	public float getRating() {
+	public Double getRating() {
 		return this.rating;
 	}
 
-	public void setRating(float rating) {
+	public void setRating(Double rating) {
 		this.rating = rating;
-	}
-
-	@Column(name = "total_points_gained", nullable = true)
-	public long getTotalPointsGained() {
-		return this.totalPointsGained;
-	}
-
-	public void setTotalPointsGained(long totalPointsGained) {
-		this.totalPointsGained = totalPointsGained;
-	}
-
-	@Column(name = "total_user_rated", nullable = true)
-	public long getTotalUserRated() {
-		return this.totalUserRated;
-	}
-
-	public void setTotalUserRated(long totalUserRated) {
-		this.totalUserRated = totalUserRated;
 	}
 
 	@Column(name = "book_link", nullable = true, length = 65535)

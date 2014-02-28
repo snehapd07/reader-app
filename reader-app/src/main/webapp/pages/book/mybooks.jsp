@@ -50,7 +50,7 @@ th {
 				<td>{{book.id}}</td>
 				<td>{{book.bookName}}</td>
 				<td>{{book.bookAuthor}}</td>
-				<td>{{book.rating}}/5</td>
+				<td>{{book.rating | number}}/5</td>
 				<td>{{book.addedBy}}</td>
 				<td>{{book.bookLink}}</td>
 				<td><a href="#/book/edit/{{book.id}}">Update</a> | <a

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 27, 2014 at 09:02 PM
+-- Generation Time: Feb 28, 2014 at 11:17 AM
 -- Server version: 5.5.31-0ubuntu0.13.04.1
 -- PHP Version: 5.4.9-4ubuntu2.2
 
@@ -31,22 +31,24 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `user_id` bigint(20) NOT NULL,
   `book_id` bigint(20) NOT NULL,
   `status` varchar(20) NOT NULL,
+  `rated_by_user` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`,`book_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `activity`
 --
 
-INSERT INTO `activity` (`id`, `user_id`, `book_id`, `status`) VALUES
-(1, 5, 4, 'READING'),
-(4, 5, 5, 'READING'),
-(5, 5, 2, 'NOT_STARTED'),
-(6, 5, 1, 'COMPLETED'),
-(7, 1, 1, 'READING'),
-(8, 1, 3, 'READING'),
-(9, 1, 2, 'NOT_STARTED');
+INSERT INTO `activity` (`id`, `user_id`, `book_id`, `status`, `rated_by_user`) VALUES
+(1, 5, 4, 'NOT_STARTED', 0),
+(4, 5, 5, 'READING', 0),
+(5, 5, 2, 'NOT_STARTED', 0),
+(6, 5, 1, 'READ_LATER', 2),
+(7, 1, 1, 'READING', 4),
+(8, 1, 3, 'READING', 0),
+(9, 1, 2, 'NOT_STARTED', 0),
+(10, 12, 1, 'COMPLETED', 1);
 
 -- --------------------------------------------------------
 
@@ -58,9 +60,7 @@ CREATE TABLE IF NOT EXISTS `book` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `book_name` text,
   `book_author` text,
-  `rating` float DEFAULT NULL,
-  `total_points_gained` bigint(20) DEFAULT NULL,
-  `total_user_rated` bigint(20) DEFAULT NULL,
+  `rating` double DEFAULT NULL,
   `book_link` text,
   `added_by` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
@@ -70,13 +70,13 @@ CREATE TABLE IF NOT EXISTS `book` (
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`id`, `book_name`, `book_author`, `rating`, `total_points_gained`, `total_user_rated`, `book_link`, `added_by`) VALUES
-(1, 'Admit Card', 'IIMK', 0, 0, 0, 'IIM - Admit Card.pdf', 1),
-(2, 'Springs MVC 3.0', 'springs', 0, 0, 0, 'spring-framework-reference.pdf', 1),
-(3, 'Ticket', 'IRCTTC', 0, 0, 0, 'IRCTC Ltd,Booked Ticket Printing.pdf', 1),
-(4, 'Alfresco', 'Alfresco', 0, 0, 0, '0596516681.pdf', 5),
-(5, 'Effective Java', 'Java', 0, 0, 0, 'EffectiveJAVA.pdf', 12),
-(6, NULL, NULL, 0, 0, 0, 'AppReceipt_1967464400_20140210_053123.pdf', 5);
+INSERT INTO `book` (`id`, `book_name`, `book_author`, `rating`, `book_link`, `added_by`) VALUES
+(1, 'Admit Card', 'IIMK', 2.3333333333333335, 'IIM - Admit Card.pdf', 1),
+(2, 'Springs MVC 3.0', 'springs', 0, 'spring-framework-reference.pdf', 1),
+(3, 'Ticket', 'IRCTTC', 0, 'IRCTC Ltd,Booked Ticket Printing.pdf', 1),
+(4, 'Alfresco', 'Alfresco', 0, '0596516681.pdf', 5),
+(5, 'Effective Java', 'Java', 0, 'EffectiveJAVA.pdf', 12),
+(6, NULL, NULL, 0, 'AppReceipt_1967464400_20140210_053123.pdf', 5);
 
 -- --------------------------------------------------------
 
